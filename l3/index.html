@@ -14,29 +14,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="interface">
-        <div class="method">
-                <img class="met implict" src="img/implict.png" alt="implict" width="32%" height="100%">
-                <img class="met explict" src="img/explict.png" alt="explict" width="32%" height="100%">
-        </div>
-        <div class="border">
-            <p><input class="approx" type="radio" name="approximationType" id="twoFirst" checked="True">По двум точкам первого порядка</p>
-            <p><input class="approx" type="radio" name="approximationType" id="threeSecond">По трем точкам второго порядка</p>
-            <p><input class="approx" type="radio" name="approximationType" id="twoSecond">По двум точкам второго порядка</p>
-        </div>
-        <div class="aprox">
-            <p><input class="app" type="radio" name="app" id="first" checked="True">Первого порядка</p>
-            <p><input class="app" type="radio" name="app" id="second">Второго порядка</p>
-        </div>
-    </div>
     <div class="sliders">
         <div class="slider-tau">
-            <span class="accuracy">h</span>
+            <span class="accuracy">x</span>
             <input type="range" class="tau" min="0" max="10" step="1">
         </div>
         <div class="slider-eps">
-            <span class="accuracy">e</span>
-            <input type="range" class="eps" min="0.05" max="0.1" step="0.02">
+            <span class="accuracy">y</span>
+            <input type="range" class="eps" min="0" max="10" step="1">
         </div>
     </div>
     <div class="container">

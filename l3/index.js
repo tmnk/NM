@@ -11,7 +11,11 @@ window.addEventListener('load', function () {
   var boundCond = 0;
   var tau = document.querySelector('.tau');
   var eps = document.querySelector('.eps');
-  var change = false;
+  tau.max = 10;
+  eps.max = 10;
+  _x = tau.value
+  _y = eps.value
+  Change();
   eps.addEventListener('change', () => {
     h = eps.value;
     //solve(_method, boundCond, _app);
@@ -86,8 +90,20 @@ function Draw(epsX, epsY, realX, realY, myY) {
     "options":{}});};
 function Change() {
   [x,y,f,u,_er, _ey] = solver();
-  var _u = [], _f = [], _er = [];
-  var k = tau.value
+  var _u = [], _f = [], _er = [], _x = [];
+  var t;
+  if (_x != tau.value) {
+    k = tau.value
+    _x = k
+    t = x[k]
+  }  
+  if (_y != eps.value) {
+    k = eps.value
+    _y = k
+    t = y[k]
+  }
+  
+
   for (var i = 0; i < f.length; i++) {
     _f.push(f[k][i])
   }
@@ -97,8 +113,10 @@ function Change() {
   for (var i = 0; i < u.length; i++) {
     _er.push(Math.abs(_u[i] - _f[i]))
   }
+  // alert(t.length)
+  // for (var i = 0; i < t.length; i++) _x.push(Math.round(t[i] * 100 / 100))
   console.log(f, u)
-  Draw(x[k],_er,y[k],_f,_u);
+  Draw(t,_er,t,_f,_u);
 }
 
 

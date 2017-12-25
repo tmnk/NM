@@ -1,4 +1,6 @@
 
+var nx = 50
+var ny = 50
 
 function empty(a) {
     var t = [];
@@ -94,16 +96,19 @@ function U(x, y) {
 
 function norm(u, v) {
     var z = div(u, v)
-    var max_el = 100;
+    var min_el = 100;
+    var max_el = 0
     var n = z.length
     var m = z[0].length
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < m; j++) {
-            if ((z[i][j]) < max_el) max_el = (z[i][j])
+            if ((z[i][j]) < min_el) {min_el = (z[i][j])}
+            if ((z[i][j]) > max_el) {max_el = (z[i][j])}
         }
     }
-    return max_el
+    return [min_el, max_el]
 }
+
 
 
 function linear_interpolation(nx, ny, hx, hy) {
@@ -162,9 +167,7 @@ function recalc(u, nx, ny, hx, hy, method) {
 }
 
 function solver() {
-    var nx = 50
-    var ny = 50
-    var eps = 0.15
+    var eps = 0.001
 
     var method = 'cheburek'
     var hx = (xl - x0) / nx
@@ -198,16 +201,13 @@ function solver() {
     It = []
     E = []
     var max = 100;
-    while (norm_val > eps) {
+    while (norm_val > eps) { //norm_val < eps N  norm_val > eps holm max > eps func
         max = 0
         var v = copy(u)
         u = recalc(u, nx, ny, hx, hy, method)
-        // for (var i = 0; i < u.length; i++) {
-        //     if (max < Math.abs(u[i][1] - F[i][1])) {
-        //         max = Math.abs(u[i][1] - F[i][1]);
-        //     }
-        // }
-        norm_val = norm(u, F)
+        var g = norm(u, v)
+        norm_val = g[0]
+        max = g[1]
         It.push(k)
         E .push(norm_val)
         k += 1
