@@ -99,7 +99,9 @@ function Change() {
   var X = Res.X;
   t = 1;
   var Y = X.map(function (x) {return Math.exp(-t - x) * Math.cos(x) * Math.cos(2 * t);})
-  Draw([],[],X,Yn,Y);
+  _er = []
+  for (var i = 0; i < X.length; i++) _er.push(Y[i] - Yn[i]);
+  Draw(X,_er,X,Yn,Y);
   // var k = 1;
   // var _xd = [], _yd = [], _yr = [], _ex = [], _er = [];
   // for (var j = 0; j < vecX.size(); ++j) {
