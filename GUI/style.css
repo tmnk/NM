@@ -1,0 +1,61 @@
+canvas {
+    /*border: 1px dotted red;*/
+}
+.graphs {
+    clear: both;
+}
+
+.container {
+    float: left;
+    margin: auto;
+    height: 50%;
+    width: 50%;
+}
+.container2 {
+    float: right;
+    margin: auto;
+    height: 50%;
+    width: 50%;
+}
+.eps, .tau {
+    width: 90%;
+    height: 10px;
+}
+.slider-eps {
+    /*margin-top: 40px;*/
+    width: 45%;
+    float: right;
+    font-style: italic;
+    /*border: 1px solid grey;*/
+}
+.slider-tau {
+    /*margin-top: 40px;*/
+    width: 45%;
+    float: left;
+    font-style: italic;
+    /*border: 1px solid grey;*/
+}
+.interface {
+    float: top;
+    height: 100px;
+    width: 100%;
+    /*border: 2px dotted lawngreen;*/
+}
+
+.method {
+    float: left;
+    width: 50%;
+    height: 100%;
+    /*border: 1px dotted red;*/
+}
+.border {
+    float: right;
+    width: 40%;
+    height: 100%;
+    border: 1px dotted white;
+}
+.sliders {
+    margin-top: 2%;
+    clear:both;
+    height: 20px;
+}
