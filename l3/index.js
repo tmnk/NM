@@ -14,27 +14,27 @@ window.addEventListener('load', function () {
   var change = false;
   eps.addEventListener('change', () => {
     h = eps.value;
-    solve(_method, boundCond, _app);
+    //solve(_method, boundCond, _app);
     Change();
   });
   tau.addEventListener('change', () => {
     m_tau = tau.value;
-    solve(_method, boundCond, _app);
+    //solve(_method, boundCond, _app);
     Change();
   });
   twoFirst.addEventListener('change', function () {
     boundCond = 0;
-    solve(_method, boundCond, _app);
+    //solve(_method, boundCond, _app);
     Change();
   });
   threeSecond.addEventListener('change', function () {
     boundCond = 1;
-    solve(_method, boundCond, _app);
+    //solve(_method, boundCond, _app);
     Change();
   });
   twoSecond.addEventListener('change', function () {
     boundCond = 2;
-    solve(_method, boundCond, _app);
+    //solve(_method, boundCond, _app);
     Change();
   });
   method.addEventListener('click', function (event) {
@@ -42,12 +42,12 @@ window.addEventListener('load', function () {
 
     if (event.target === implict) {
       _method = 0;
-      solve(_method, boundCond, _app);
+      //solve(_method, boundCond, _app);
       Change();
     }
     if (event.target === explict) {
       _method = 1;
-      solve(_method, boundCond, _app);
+      //solve(_method, boundCond, _app);
       Change();
     }
   });
@@ -85,27 +85,24 @@ function Draw(epsX, epsY, realX, realY, myY) {
     },
     "options":{}});};
 function Change() {
-  var k = 1;
-  var _xd = [], _yd = [], _yr = [], _ex = [], _er = [];
-  for (var j = 0; j < vecX.size() / 2; ++j) {
-    _xd.push(vecX.get(j))
-    _yr.push(u(vecX.get(j), vecT.get(k)));
-    _yd.push(matU.get(k, j));
+  [x,y,f,u,_er, _ey] = solver();
+  var _u = [], _f = [], _er = [];
+  var k = tau.value
+  for (var i = 0; i < f.length; i++) {
+    _f.push(f[k][i])
   }
-  // for (var i = 0; i < matU.rowSize() / 20; ++i) {
-  //   var error = 0.0;
-  //   for (var j = 0; j < matU.colSize(); ++j) {
-  //     error = Math.max(error, Math.abs(matU.get(i, j) - u(vecX.get(j), vecT.get(i))));
-  //   }
-
-  //   _ex.push(vecT.get(i));
-  //   _er.push(error);
-  // }
-  Draw(_ex,_er,_xd,_yr,_yd);
+  for (var i = 0; i < u.length; i++) {
+    _u.push(u[k][i])
+  }
+  for (var i = 0; i < u.length; i++) {
+    _er.push(Math.abs(_u[i] - _f[i]))
+  }
+  console.log(f, u)
+  Draw(x[k],_er,y[k],_f,_u);
 }
 
 
-// solve(1,3,1);
+// //solve(1,3,1);
 // var  k = 1;
 // var _xd = [], _yd = [], _yr = [];
 // for (var j = 0; j < vecX.size(); ++j) {

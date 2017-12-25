@@ -94,12 +94,12 @@ function U(x, y) {
 
 function norm(u, v) {
     var z = div(u, v)
-    var max_el = 0;
+    var max_el = 100;
     var n = z.length
     var m = z[0].length
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < m; j++) {
-            if (Math.abs(z[i][j]) > max_el) max_el = Math.abs(z[i][j])
+            if ((z[i][j]) < max_el) max_el = (z[i][j])
         }
     }
     return max_el
@@ -162,9 +162,9 @@ function recalc(u, nx, ny, hx, hy, method) {
 }
 
 function solver() {
-    var nx = 10
-    var ny = 10
-    var eps = 0.1
+    var nx = 50
+    var ny = 50
+    var eps = 0.15
 
     var method = 'cheburek'
     var hx = (xl - x0) / nx
@@ -197,22 +197,27 @@ function solver() {
     var k = 0
     It = []
     E = []
-
+    var max = 100;
     while (norm_val > eps) {
+        max = 0
         var v = copy(u)
         u = recalc(u, nx, ny, hx, hy, method)
-        norm_val = norm(u, v)
+        // for (var i = 0; i < u.length; i++) {
+        //     if (max < Math.abs(u[i][1] - F[i][1])) {
+        //         max = Math.abs(u[i][1] - F[i][1]);
+        //     }
+        // }
+        norm_val = norm(u, F)
         It.push(k)
         E .push(norm_val)
         k += 1
     }
 
     [X, Y] = meshgrid(X, Y)
-    console.log(F, u);
+    return [X,Y,F,u, It, E]
     // F = nj.transpose(F)
     // u = nj.transpose(u) 
     // ax.plot_surface(X, Y, F, color='blue')
     // ax.plot_surface(X, Y, u, color='green')
 }
 
-solver()
