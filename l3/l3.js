@@ -138,24 +138,24 @@ function linear_interpolation(nx, ny, hx, hy) {
     return u0
 }
 
-function recalc(u, nx, ny, hx, hy, method) {
+function recalc(u, nx, ny, hx, hy) {
     var u_new = copy(u)
     var w = 1.9
     for (var j = 1; j < ny; j++) {
         for (var i = 1; i < nx; i++) {
-            if (method == 'lol')
+            if (_method == 0)
                 u_new[i][j] = (-2 * u[i+1][j] / hx - u[i+1][j] / hx ** 2 -
                                u[i-1][j] / hx ** 2 - u[i][j+1]/hy**2 -
                                u[i][j-1]/hy**2) / (3 - 2 / hx - 2 / hx**2 -
                                                    2 / hy**2)
 
-            if (method == 'kek')
+            if (_method == 1)
                 u_new[i][j] = (-2 * u[i+1][j] / hx - u[i+1][j] / hx ** 2 -
                                u_new[i-1][j] / hx ** 2 - u[i][j+1]/hy**2 -
                                u_new[i][j-1]/hy**2) / (3 - 2 / hx - 2 / hx**2 -
                                                        2 / hy**2)
 
-            if (method == 'cheburek')
+            if (_method == 2)
                 u_new[i][j] = (1 - w)*u[i][j] + w*(-2 * u[i+1][j] / hx - u[i+1][j] / hx ** 2 -
                                u_new[i-1][j] / hx ** 2 - u[i][j+1]/hy**2 -
                                u_new[i][j-1]/hy**2) / (3 - 2 / hx - 2 / hx**2 -
@@ -168,8 +168,6 @@ function recalc(u, nx, ny, hx, hy, method) {
 
 function solver() {
     var eps = 0.001
-
-    var method = 'cheburek'
     var hx = (xl - x0) / nx
     var hy = (yl - y0) / ny
 
@@ -204,7 +202,7 @@ function solver() {
     while (norm_val > eps) { //norm_val < eps N  norm_val > eps holm max > eps func
         max = 0
         var v = copy(u)
-        u = recalc(u, nx, ny, hx, hy, method)
+        u = recalc(u, nx, ny, hx, hy)
         var g = norm(u, v)
         norm_val = g[0]
         max = g[1]

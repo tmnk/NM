@@ -43,10 +43,31 @@ canvas {
 }
 
 .method {
-    float: left;
-    width: 50%;
+    /*float: left;*/
+    width: 100%;
     height: 100%;
     /*border: 1px dotted red;*/
+}
+.zeidel {
+    width: 32%;
+    height: 100%;
+    text-align: center;
+    float: right;
+    border: 4px ridge blue;
+}
+.libman {
+    width: 32%;
+    text-align: center;
+    height: 100%;
+    float: right;
+    border: 4px ridge blue;
+}
+.relax {
+    width: 32%;
+    text-align: center;
+    height: 100%;
+    float: right;
+    border: 4px ridge blue;
 }
 .border {
     float: right;

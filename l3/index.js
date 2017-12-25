@@ -2,13 +2,9 @@ var _method = 0;
 var _app = 0;
 window.addEventListener('load', function () {
   var method = document.querySelector('.method');
-  var explict = document.querySelector('.explict');
-  var implict = document.querySelector('.implict');
-
-  var twoFirst = document.querySelector('#twoFirst');
-  var threeSecond = document.querySelector('#threeSecond');
-  var twoSecond = document.querySelector('#twoSecond');
-  var boundCond = 0;
+  var zeidel = document.querySelector('.zeidel');
+  var libman = document.querySelector('.libman');
+  var relax = document.querySelector('.relax');
   var tau = document.querySelector('.tau');
   var eps = document.querySelector('.eps');
   tau.max = 10;
@@ -26,31 +22,22 @@ window.addEventListener('load', function () {
     //solve(_method, boundCond, _app);
     Change();
   });
-  twoFirst.addEventListener('change', function () {
-    boundCond = 0;
-    //solve(_method, boundCond, _app);
-    Change();
-  });
-  threeSecond.addEventListener('change', function () {
-    boundCond = 1;
-    //solve(_method, boundCond, _app);
-    Change();
-  });
-  twoSecond.addEventListener('change', function () {
-    boundCond = 2;
-    //solve(_method, boundCond, _app);
-    Change();
-  });
+ 
   method.addEventListener('click', function (event) {
     if (!event.target.classList.contains('met')) return;
 
-    if (event.target === implict) {
-      _method = 0;
+    if (event.target === relax) {
+      _method = 2;
       //solve(_method, boundCond, _app);
       Change();
     }
-    if (event.target === explict) {
+    if (event.target === zeidel) {
       _method = 1;
+      //solve(_method, boundCond, _app);
+      Change();
+    }
+    if (event.target === libman) {
+      _method = 0;
       //solve(_method, boundCond, _app);
       Change();
     }
